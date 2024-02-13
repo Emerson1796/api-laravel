@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             EstadosTableSeeder::class,
             CidadesTableSeeder::class,
-            EnderecosTableSeeder::class,
             UsuariosTableSeeder::class,
+            EnderecosTableSeeder::class,
             EnderecoUsuarioTableSeeder::class,
        ]);
     }
