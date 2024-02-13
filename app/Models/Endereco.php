@@ -28,4 +28,9 @@ class Endereco extends Model
         return $this->belongsToMany(Usuario::class, 'endereco_usuario', 'endereco_id', 'usuario_id')
             ->withTimestamps();
     }
+
+    public function cidade()
+    {
+        return $this->belongsTo(Cidade::class, 'id_cidade');
+    }
 }

@@ -15,7 +15,8 @@ class UsuarioService implements UsuarioServiceInterface
 
     public function find(int $id): ?Usuario
     {
-        return Usuario::findOrFail($id);
+        $usuario = Usuario::with(['enderecos.cidade.estado'])->findOrFail($id);
+        return $usuario;
     }
 
     public function create(array $data, array $enderecoIds): Usuario

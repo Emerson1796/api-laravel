@@ -23,7 +23,16 @@ class UsuarioController extends Controller
     public function show($id)
     {
         $usuario = $this->usuarioService->find($id);
-        return response()->json($usuario);
+
+        $enderecosArray = array();
+
+        if (isset($usuario->email)) {
+            foreach ($usuario->enderecos as $endereco) {
+                $enderecosArray[] = "{$endereco->logradouro}, {$endereco->numero}, {$endereco->complemento} - {$endereco->cep} - {$endereco->cidade->nome} - {$endereco->cidade->estado->sigla}";
+            }
+        }
+
+        return response()->json(["user" => $usuario, "addresses" => $enderecosArray]);
     }
 
     public function store(Request $request)
