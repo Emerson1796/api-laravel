@@ -2,62 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Contracts\UsuarioServiceInterface;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    private $usuarioService;
+
+    public function __construct(UsuarioServiceInterface $usuarioService)
+    {
+        $this->usuarioService = $usuarioService;
+    }
+
     public function index()
     {
-        //
+        $usuarios = $this->usuarioService->findAll();
+        return response()->json($usuarios);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $usuario = $this->usuarioService->find($id);
+        return response()->json($usuario);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $usuario = $this->usuarioService->create($request->all(), $request->enderecoIds ?? []);
+        return response()->json($usuario, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $usuario = $this->usuarioService->update($id, $request->all(), $request->enderecoIds ?? []);
+        return response()->json($usuario);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function destroy($id)
+    {
+        $this->usuarioService->delete($id);
+        return response()->json(null, 204);
+    }
+
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function create()
     {
         //
     }
