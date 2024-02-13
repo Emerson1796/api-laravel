@@ -3,11 +3,12 @@
 namespace App\Services\Impl;
 
 use App\Services\Contracts\EstadoServiceInterface;
+use Illuminate\Support\Collection;
 use App\Models\Estado;
 
 class EstadoService implements EstadoServiceInterface
 {
-    public function findAll()
+    public function findAll(): Collection
     {
         return Estado::all();
     }

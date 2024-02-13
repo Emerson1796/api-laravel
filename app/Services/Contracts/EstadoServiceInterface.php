@@ -7,7 +7,7 @@ use App\Models\Estado;
 
 interface EstadoServiceInterface
 {
-    public function findAll();
+    public function findAll(): Collection;
     public function find(int $id): ?Estado;
     public function create(array $data): Estado;
     public function update(int $id, array $data): Estado;

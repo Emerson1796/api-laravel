@@ -4,10 +4,11 @@ namespace App\Services\Impl;
 
 use App\Models\Usuario;
 use App\Services\Contracts\UsuarioServiceInterface;
+use Illuminate\Support\Collection;
 
 class UsuarioService implements UsuarioServiceInterface
 {
-    public function findAll()
+    public function findAll(): Collection
     {
         return Usuario::all();
     }
